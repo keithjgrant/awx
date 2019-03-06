@@ -2565,8 +2565,9 @@ class cloudforms(PluginFileInjector):
 
 
 class tower(PluginFileInjector):
-    plugin_name = 'tower'  # FIXME: fix license issue and implement me
+    plugin_name = 'tower'
     base_injector = 'template'
+    initial_version = '2.8'
 
     def get_script_env(self, inventory_update, private_data_dir, private_data_files):
         env = super(tower, self).get_script_env(inventory_update, private_data_dir, private_data_files)
