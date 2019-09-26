@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   DataListItem,
   DataListItemRow,
-  DataListItemCells,
+  DataListItemCells as PFDataListItemCells,
   Tooltip,
   Button as PFButton,
 } from '@patternfly/react-core';
@@ -27,6 +27,29 @@ const StyledButton = styled(PFButton)`
     color: white;
   }
 `;
+
+const DataListItemCells = styled(PFDataListItemCells)`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+`;
+
+const DataListCellWide = styled(DataListCell)`
+  @media (max-width: 768px) {
+    && {
+      flex: 1 1 100%;
+    }
+  }
+`;
+const DataListIconCell = styled(DataListCell)`
+  @media (max-width: 768px) {
+    && {
+      flex: 0 0 50px;
+    }
+  }
+`;
+
 class TemplateListItem extends Component {
   render() {
     const { i18n, template, isSelected, onSelect } = this.props;
@@ -46,21 +69,21 @@ class TemplateListItem extends Component {
           />
           <DataListItemCells
             dataListCells={[
-              <DataListCell key="divider">
+              <DataListCellWide key="divider">
                 <VerticalSeparator />
                 <span>
                   <Link to={`/templates/${template.type}/${template.id}`}>
                     <b>{template.name}</b>
                   </Link>
                 </span>
-              </DataListCell>,
-              <DataListCell key="type">
+              </DataListCellWide>,
+              <DataListCellWide key="type">
                 {toTitleCase(template.type)}
-              </DataListCell>,
-              <DataListCell key="sparkline">
+              </DataListCellWide>,
+              <DataListIconCell key="sparkline">
                 <Sparkline jobs={template.summary_fields.recent_jobs} />
-              </DataListCell>,
-              <DataListCell lastcolumn="true" key="launch">
+              </DataListIconCell>,
+              <DataListIconCell lastcolumn="true" key="launch">
                 {canLaunch && template.type === 'job_template' && (
                   <Tooltip content={i18n._(t`Launch`)} position="top">
                     <LaunchButton
@@ -76,7 +99,7 @@ class TemplateListItem extends Component {
                     </LaunchButton>
                   </Tooltip>
                 )}
-              </DataListCell>,
+              </DataListIconCell>,
             ]}
           />
         </DataListItemRow>
