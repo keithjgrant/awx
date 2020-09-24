@@ -52,3 +52,4 @@ class Base {
 }
 
 export default Base;
+export { defaultHttp as axiosInstance };

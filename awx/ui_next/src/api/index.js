@@ -1,3 +1,4 @@
+import { axiosInstance } from './Base';
 import AdHocCommands from './models/AdHocCommands';
 import Applications from './models/Applications';
 import Config from './models/Config';
@@ -73,6 +74,7 @@ const WorkflowJobTemplatesAPI = new WorkflowJobTemplates();
 const WorkflowJobsAPI = new WorkflowJobs();
 
 export {
+  axiosInstance,
   AdHocCommandsAPI,
   ApplicationsAPI,
   ConfigAPI,
